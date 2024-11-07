@@ -7,7 +7,7 @@ let imgdroite = document.querySelectorAll('.droite img')
 // On va créer une fonctions animation qui va se déclancher en appuyant sur le bouton
 
 
-function animation() {
+function animationf() {
     imggauche.forEach((imgG, index) => {
         let imgD = imgdroite[index];
 
@@ -24,5 +24,8 @@ function animation() {
     });
 }
 
-button.addEventListener('click', animation)
+button.addEventListener('click', animationf)
+ 
+function fight() {
 
+}

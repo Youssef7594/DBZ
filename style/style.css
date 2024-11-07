@@ -65,15 +65,25 @@ body{
 .combat-deux{
     display: flex;
 
-    combattant-deux{
-        
-    }
+    
 }
 
 .combat-trois{
     display: flex;
 
-    combattant-trois{
-        
-    }
+    
+} 
+
+
+
+
+@keyframes fight {
+    0% { opacity: 1; transform: translateX(0); }
+    50% { opacity: 0; transform: translateX(-10px); }
+    100% { opacity: 1; transform: translateX(0); }
 }
+
+.animate-fight {
+    animation: fight 0.2s ease-in-out infinite;
+}
+
