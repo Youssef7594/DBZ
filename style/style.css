@@ -40,6 +40,9 @@ body{
         background: linear-gradient(to right, rgb(255, 0, 0), rgb(245, 217, 6));
     }
 }
+
+
+/* LES PERSONNAGE ET TOUR */
 .tour-un{
     display: flex;
     margin-top: 120px;
@@ -54,9 +57,93 @@ body{
 
 .combat{
     display: flex;
+    position: relative;
+
+    .gauche::after {
+        content: '';
+        display: block;
+        background-color: red;
+        width: 2px;
+        height: 100px;
+        position: absolute;
+        left: 50px;
+    }
+
+    .droite::after {
+        content: '';
+        display: block;
+        background-color: red;
+        width: 2px;
+        height: 100px;
+        position: absolute;
+        left: 280px;
+    }
 
     
+}
 
+
+
+.lespremier{
+    display: flex;
+    justify-content: space-between;
+
+    
+}
+
+hr{
+    margin-top: 100px;
+    border-color: red;
+
+    
+}
+
+.tout{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.separation {
+    
+    background-color: red;
+    width: 2px;
+    height: 100px;
+    margin-left: 230px;
+    margin-top: -10px;
+    
+}
+
+.separation1 {
+    
+    background-color: rgb(255, 0, 0);
+    width: 2px;
+    height: 100px;
+    margin-top: -10px;
+    position: absolute;
+    right: 300px;
+    
+}
+
+.separation2 {
+    
+    background-color: red;
+    width: 2px;
+    height: 100px;
+    margin-top: -10px;
+    position: absolute;
+    left: 700px;
+    
+}
+
+.separation3 {
+    
+    background-color: rgb(255, 0, 0);
+    width: 2px;
+    height: 100px;
+    margin-top: -10px;
+    position: absolute;
+    right: 760px;
     
 }
 
@@ -64,6 +151,12 @@ body{
 
 
 
+
+
+
+
+
+/* Animation css */
 
 @keyframes fight {
     0% { opacity: 1; transform: translateX(0); }
