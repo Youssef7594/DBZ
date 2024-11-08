@@ -59,7 +59,7 @@ body{
     display: flex;
     position: relative;
 
-    .gauche::after {
+   /*  .gauche::after {
         content: '';
         display: block;
         background-color: red;
@@ -68,8 +68,8 @@ body{
         position: absolute;
         left: 50px;
     }
-
-    .droite::after {
+ */
+    /* .droite::after {
         content: '';
         display: block;
         background-color: red;
@@ -78,7 +78,7 @@ body{
         position: absolute;
         left: 280px;
     }
-
+ */
     
 }
 
@@ -98,13 +98,13 @@ hr{
     
 }
 
-.tout{
+/* .tout{
     display: flex;
     justify-content: space-between;
-}
+} */
 
 
-.separation {
+/* .separation {
     
     background-color: red;
     width: 2px;
@@ -112,9 +112,9 @@ hr{
     margin-left: 230px;
     margin-top: -10px;
     
-}
+} */
 
-.separation1 {
+/* .separation1 {
     
     background-color: rgb(255, 0, 0);
     width: 2px;
@@ -145,23 +145,17 @@ hr{
     position: absolute;
     right: 760px;
     
-}
+} */
 
 
 
 
 
-
-
-
-
-
-/* Animation css */
 
 @keyframes fight {
     0% { opacity: 1; transform: translateX(0); }
-    50% { opacity: 0; transform: translateX(-10px); }
-    100% { opacity: 1; transform: translateX(0); }
+    50% { opacity: 0; transform: translateX(-10px); }  /* L'animation combat*/
+     100% { opacity: 1; transform: translateX(0); }
 }
 
 .animate-fight {
@@ -171,5 +165,87 @@ hr{
 .loser {
     filter: grayscale(100%);
     opacity: 0.6;
+}
+
+/* .tour-un .combat img {
+    width: 150px;
+    height: 150px; 
+    object-fit: cover; 
+    border: 2px solid #ff0000; 
+    box-sizing: border-box;
+} */
+
+.tour-un {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* J'ai mis ici un espacement entre les combats */
+    justify-content: center;
+    margin-top: 120px;
+    margin-left: 70px;
+}
+
+.combat {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.combat img {
+    width: 100px; 
+    height: 100px;
+    object-fit: contain; 
+    border: 2px solid #ff0000; /* Ici j'ai fait un encadré pour avoir
+    les images à la même taille */
+    box-sizing: border-box;
+}
+
+@keyframes moveToBottom {
+    0% {
+        transform: translateY(0);
+    }
+    
+    100% {
+        transform: translateY(300px); /* Il y'a ici un nouveau keyframe pour l'animation gagnant */
+    }
+}
+
+.move-bottom {
+    animation: moveToBottom 2s ease-in-out forwards;
+}
+
+/* Styles pour les étapes de la compétition */
+
+/* Quart de finale - bordure verte */
+.quart-de-finale {
+    border: 4px solid green;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Demi-finale - bordure bleue */
+.demi-finale {
+    border: 4px solid blue;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Finale - bordure dorée */
+.finale {
+    border: 4px solid gold;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Légère ombre dorée pour plus d'impact */
+}
+
+
+@keyframes highlight {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.highlighted {
+    animation: highlight 1s ease-in-out infinite;
 }
 

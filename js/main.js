@@ -1,18 +1,47 @@
-let button = document.querySelector('button')
+let button = document.querySelector('button');
+let imggauche = document.querySelectorAll('.gauche img');
+let imgdroite = document.querySelectorAll('.droite img');
+let currentStageIndex = 0;
+let fightersInitialized = false; // Suivre si les combattants sont déjà chargés
 
-let imggauche = document.querySelectorAll('.gauche img')
+// Fonction pour afficher les combattants au premier clic
+function displayFighters() {
+    fetch('https://dragonball-api.com/api/characters')
+        .then(response => response.json())
+        .then(data => {
+            let persos = data.items;
+            let selectedFighters = [];
+            while (selectedFighters.length < 8) {
+                let randomIndex = Math.floor(Math.random() * persos.length);
+                let selectedCharacter = persos[randomIndex];
+                if (!selectedFighters.includes(selectedCharacter)) {
+                    selectedFighters.push(selectedCharacter);
+                }
+            }
 
-let imgdroite = document.querySelectorAll('.droite img')
+            // Sefyu : On assigne les images des personnages sélectionnés aux emplacements des combattants
+            let imgSlots = document.querySelectorAll('.tour-un .combat .gauche img, .tour-un .combat .droite img');
+            imgSlots.forEach((imgSlot, index) => {
+                if (selectedFighters[index]) {
+                    imgSlot.src = selectedFighters[index].image;
+                    imgSlot.alt = selectedFighters[index].name;
+                }
+            });
 
-// On va créer une fonctions animation qui va se déclancher en appuyant sur le bouton
+            button.textContent = 'Commencer le combat'; // Change le texte du bouton pour indiquer que le combat peut commencer
+            fightersInitialized = true; // Indique que les combattants sont chargés pour le tournoi
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des personnages :', error);
+        });
+}
 
-
+// Fonction d'animation pour les combats, activée à chaque tour
 function animation() {
     imggauche.forEach((imgG, index) => {
         let imgD = imgdroite[index];
 
-        // Sefyu :  Pour que tu comprennes : On applique l'animation en ajoutant la classe
-
+        // Sefyu : On applique l'animation en ajoutant la classe
         imgG.classList.add('animate-fight');
         imgD.classList.add('animate-fight');
 
@@ -24,56 +53,57 @@ function animation() {
     });
 }
 
-
- 
+// Fonction de combat qui détermine les gagnants et perdants
 function fight() {
     imggauche.forEach((imgG, index) => {
         let imgD = imgdroite[index];
         
-        // Sefyu : On détermine aléatoirement ici qui sera le vainquer
+        // Sefyu : On détermine aléatoirement ici qui sera le vainqueur
         let winner = Math.random() < 0.5;
-        
+
         if (winner) {
             imgD.classList.add('loser');  
             imgG.classList.remove('loser'); 
+            
+            // Youssef : La classe 'move-bottom' crée l'animation du gagnant
+            imgG.classList.add('move-bottom');
         } else {
             imgG.classList.add('loser'); 
             imgD.classList.remove('loser'); 
+            
+            imgD.classList.add('move-bottom');
         }
     });
 }
 
-function displayFighters(){
-  
-  fetch(' https://dragonball-api.com/api/characters')
-  .then(response => response.json()) 
-  .then(data => {
-
-    let fightersContainer = document.getElementById('fighters');
-    
-    // Jusque la logique, 8 perssonnages donc,
-    // la boucle elle va s'arrêter à 8
-
-    for (let i = 0; i < 8; i++) {
-      // On crée une nouvelle image pour chaque personnage
-      let img = document.createElement('img');
-
-      // On prend l'URL de l'image du personnage
-      img.src = data[i].image; 
-
-       // On donne un texte alternatif avec le nom du personnage
-      img.alt = data[i].name; 
-      
-      // On vaici ajouter l'image au container l'image au container
-      fightersContainer.appendChild(img);
+// Gestion des étapes du tournoi avec changement de texte du bouton
+function nextRound() {
+    // Vérifie si les combattants ne sont pas encore chargés, et charge si nécessaire
+    if (!fightersInitialized) {
+        displayFighters();
+    } else {
+        // Sinon, déclenche l'animation et le combat pour chaque tour
+        animation();
+        fight();
+        currentStageIndex++;
+        
+        // Mise à jour du texte du bouton en fonction de l'étape actuelle
+        switch (currentStageIndex) {
+            case 1:
+                button.textContent = 'Demi-finale';
+                break;
+            case 2:
+                button.textContent = 'Finale';
+                break;
+            case 3:
+                button.textContent = 'Voir le gagnant';
+                break;
+            default:
+                button.textContent = 'Tournoi terminé';
+                button.disabled = true; // Désactive le bouton après la fin du tournoi
+        }
     }
-  })
-  .catch(error => {
-    
-    console.error('Erreur lors de la récupération des personnages :', error);
-  });
-    }
+}
 
-button.addEventListener('click', displayFighters)
-button.addEventListener('click', animation)
-button.addEventListener('click', fight)
+// Associe l'événement de clic au bouton pour démarrer le tournoi
+button.addEventListener('click', nextRound);

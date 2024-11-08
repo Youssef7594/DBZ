@@ -40,16 +40,16 @@ let displayCharacter = (character) => {
 };
 
 
-let testApi = () => {
-  fetchFilteredCharacters({ race: 'Saiyan', affiliation: 'Z Fighter' })
-    .then(characters => {
-      characters.forEach(character => displayCharacter(character));  
-    });
-};
+// let testApi = () => {
+//   fetchFilteredCharacters({ race: 'Saiyan', affiliation: 'Z Fighter' })
+//     .then(characters => {
+//       characters.forEach(character => displayCharacter(character));  
+//     });
+// };
 
 let testCharacterById = (id) => {
   fetchCharacterById(id)
     .then(character => displayCharacter(character));  
 };
 
-testApi();  
+// testApi();  
