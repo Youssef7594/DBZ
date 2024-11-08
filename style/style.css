@@ -52,27 +52,15 @@ body{
     }
 }
 
-.combat-un{
+.combat{
     display: flex;
 
     
-
-    combattant-un{
-        border: solid;
-    }
-}
-
-.combat-deux{
-    display: flex;
 
     
 }
 
-.combat-trois{
-    display: flex;
 
-    
-} 
 
 
 
@@ -85,5 +73,10 @@ body{
 
 .animate-fight {
     animation: fight 0.2s ease-in-out infinite;
+}
+
+.loser {
+    filter: grayscale(100%);
+    opacity: 0.6;
 }
 
